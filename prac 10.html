@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Study Planner</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-indigo-700 text-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-5 py-4 flex flex-col sm:flex-row
+                    justify-between items-center gap-3">
+
+            <h1 class="text-2xl font-bold">
+                📚 StudyMate
+            </h1>
+
+            <div class="flex gap-5 text-sm sm:text-base">
+                <a href="#dashboard" class="hover:text-indigo-200">Dashboard</a>
+                <a href="#tasks" class="hover:text-indigo-200">Tasks</a>
+                <a href="#about" class="hover:text-indigo-200">About</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="max-w-6xl mx-auto px-5 py-10 text-center">
+
+        <h2 class="text-4xl sm:text-5xl font-bold text-gray-800">
+            Plan Your Studies.
+            <span class="text-indigo-600">Achieve Your Goals.</span>
+        </h2>
+
+        <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+            A simple study planner to organize assignments, revision,
+            projects and daily academic activities.
+        </p>
+
+    </section>
+
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="max-w-6xl mx-auto px-5">
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+
+            <!-- Total Tasks -->
+            <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                <div class="text-4xl mb-2">📋</div>
+                <h3 class="text-gray-500 font-medium">Total Tasks</h3>
+                <p id="totalTasks" class="text-3xl font-bold text-indigo-600">
+                    0
+                </p>
+            </div>
+
+            <!-- Completed -->
+            <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                <div class="text-4xl mb-2">✅</div>
+                <h3 class="text-gray-500 font-medium">Completed</h3>
+                <p id="completedTasks" class="text-3xl font-bold text-green-600">
+                    0
+                </p>
+            </div>
+
+            <!-- Pending -->
+            <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                <div class="text-4xl mb-2">⏳</div>
+                <h3 class="text-gray-500 font-medium">Pending</h3>
+                <p id="pendingTasks" class="text-3xl font-bold text-orange-500">
+                    0
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Add Task -->
+    <section id="tasks" class="max-w-4xl mx-auto px-5 py-10">
+
+        <div class="bg-white rounded-2xl shadow-xl p-6">
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-5">
+                ➕ Add Study Task
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="Enter task"
+                    class="md:col-span-2 border border-gray-300 rounded-lg
+                           px-4 py-3 focus:ring-2 focus:ring-indigo-500
+                           focus:outline-none"
+                >
+
+                <select
+                    id="priority"
+                    class="border border-gray-300 rounded-lg px-4 py-3
+                           focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                >
+                    <option value="Low">Low Priority</option>
+                    <option value="Medium">Medium Priority</option>
+                    <option value="High">High Priority</option>
+                </select>
+
+            </div>
+
+            <button
+                onclick="addTask()"
+                class="w-full mt-4 bg-indigo-600 hover:bg-indigo-700
+                       text-white font-semibold py-3 rounded-lg transition">
+                Add Task
+            </button>
+
+        </div>
+
+
+        <!-- Task List -->
+        <div class="bg-white rounded-2xl shadow-xl p-6 mt-6">
+
+            <div class="flex flex-col sm:flex-row justify-between
+                        items-start sm:items-center gap-3 mb-5">
+
+                <h2 class="text-2xl font-bold text-gray-800">
+                    📌 My Study Tasks
+                </h2>
+
+                <button
+                    onclick="clearCompleted()"
+                    class="text-red-500 hover:text-red-700 font-medium">
+                    Clear Completed
+                </button>
+
+            </div>
+
+            <div id="taskList" class="space-y-3"></div>
+
+            <p id="emptyMessage"
+               class="text-center text-gray-500 py-8">
+                No tasks yet. Add your first study task!
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- About -->
+    <section id="about" class="max-w-4xl mx-auto px-5 pb-10">
+
+        <div class="bg-indigo-700 text-white rounded-2xl p-8 text-center">
+
+            <h2 class="text-2xl font-bold mb-3">
+                About StudyMate
+            </h2>
+
+            <p class="text-indigo-100">
+                StudyMate helps students organize their academic workload,
+                prioritize important tasks and track their daily progress
+                using a simple and responsive interface.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 text-center py-5">
+        <p>
+            © 2026 StudyMate | Built with HTML, Tailwind CSS & JavaScript
+        </p>
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        let tasks = [];
+
+        // Add Task
+        function addTask() {
+
+            const taskInput = document.getElementById("taskInput");
+            const priority = document.getElementById("priority");
+
+            const taskText = taskInput.value.trim();
+
+            if (taskText === "") {
+                alert("Please enter a study task!");
+                return;
+            }
+
+            const task = {
+                id: Date.now(),
+                text: taskText,
+                priority: priority.value,
+                completed: false
+            };
+
+            tasks.push(task);
+
+            taskInput.value = "";
+
+            displayTasks();
+        }
+
+
+        // Display Tasks
+        function displayTasks() {
+
+            const taskList = document.getElementById("taskList");
+            const emptyMessage = document.getElementById("emptyMessage");
+
+            taskList.innerHTML = "";
+
+            if (tasks.length === 0) {
+                emptyMessage.style.display = "block";
+            } else {
+                emptyMessage.style.display = "none";
+            }
+
+            tasks.forEach(function(task) {
+
+                const div = document.createElement("div");
+
+                let priorityClass = "";
+
+                if (task.priority === "High") {
+                    priorityClass =
+                        "bg-red-100 text-red-700";
+                } else if (task.priority === "Medium") {
+                    priorityClass =
+                        "bg-yellow-100 text-yellow-700";
+                } else {
+                    priorityClass =
+                        "bg-green-100 text-green-700";
+                }
+
+                div.className =
+                    "flex flex-col sm:flex-row sm:items-center " +
+                    "justify-between gap-3 p-4 bg-gray-50 " +
+                    "border border-gray-200 rounded-lg";
+
+                div.innerHTML = `
+
+                    <div class="flex items-center gap-3">
+
+                        <input
+                            type="checkbox"
+                            ${task.completed ? "checked" : ""}
+                            onchange="toggleTask(${task.id})"
+                            class="w-5 h-5 accent-indigo-600 cursor-pointer"
+                        >
+
+                        <span class="${
+                            task.completed
+                            ? "line-through text-gray-400"
+                            : "text-gray-700"
+                        } font-medium">
+                            ${task.text}
+                        </span>
+
+                    </div>
+
+                    <div class="flex items-center gap-3">
+
+                        <span class="${priorityClass}
+                                     px-3 py-1 rounded-full text-sm font-medium">
+                            ${task.priority}
+                        </span>
+
+                        <button
+                            onclick="deleteTask(${task.id})"
+                            class="text-red-500 hover:text-red-700 text-xl">
+                            🗑️
+                        </button>
+
+                    </div>
+                `;
+
+                taskList.appendChild(div);
+            });
+
+            updateDashboard();
+        }
+
+
+        // Mark task as completed
+        function toggleTask(id) {
+
+            tasks = tasks.map(function(task) {
+
+                if (task.id === id) {
+                    task.completed = !task.completed;
+                }
+
+                return task;
+            });
+
+            displayTasks();
+        }
+
+
+        // Delete task
+        function deleteTask(id) {
+
+            tasks = tasks.filter(function(task) {
+                return task.id !== id;
+            });
+
+            displayTasks();
+        }
+
+
+        // Clear completed tasks
+        function clearCompleted() {
+
+            tasks = tasks.filter(function(task) {
+                return !task.completed;
+            });
+
+            displayTasks();
+        }
+
+
+        // Update dashboard
+        function updateDashboard() {
+
+            const total = tasks.length;
+
+            const completed = tasks.filter(function(task) {
+                return task.completed;
+            }).length;
+
+            const pending = total - completed;
+
+            document.getElementById("totalTasks").textContent = total;
+            document.getElementById("completedTasks").textContent = completed;
+            document.getElementById("pendingTasks").textContent = pending;
+        }
+
+
+        // Add task using Enter key
+        document.getElementById("taskInput").addEventListener(
+            "keypress",
+            function(event) {
+
+                if (event.key === "Enter") {
+                    addTask();
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

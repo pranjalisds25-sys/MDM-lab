@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>College Help Portal - FAQ</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        header h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #e0e7ff;
+        }
+
+        /* FAQ Container */
+        .faq-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 30px;
+            color: #312e81;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #64748b;
+        }
+
+        /* FAQ Item */
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Question */
+        .question {
+            width: 100%;
+            padding: 20px;
+            background: white;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            font-size: 17px;
+            font-weight: bold;
+            color: #1e293b;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .question:hover {
+            background: #eef2ff;
+            color: #4338ca;
+        }
+
+        /* Plus/Minus Icon */
+        .icon {
+            font-size: 24px;
+            color: #4f46e5;
+            transition: transform 0.3s;
+        }
+
+        /* Answer */
+        .answer {
+            display: none;
+            padding: 0 20px 20px 20px;
+            color: #64748b;
+            line-height: 1.7;
+            background: #fafafa;
+        }
+
+        /* Active FAQ */
+        .faq-item.active .answer {
+            display: block;
+        }
+
+        .faq-item.active .icon {
+            transform: rotate(45deg);
+        }
+
+        /* Footer */
+        footer {
+            background: #1e1b4b;
+            color: #c7d2fe;
+            text-align: center;
+            padding: 25px;
+            margin-top: 60px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 30px;
+            }
+
+            header p {
+                font-size: 16px;
+            }
+
+            .question {
+                font-size: 15px;
+                padding: 16px;
+            }
+
+            .answer {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>🎓 College Help Portal</h1>
+        <p>Find quick answers to your frequently asked questions</p>
+    </header>
+
+
+    <!-- FAQ Section -->
+    <main class="faq-container">
+
+        <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+            <p>Click on a question to view or hide its answer.</p>
+        </div>
+
+
+        <!-- FAQ 1 -->
+        <div class="faq-item">
+
+            <button class="question">
+                <span>How can I apply for admission?</span>
+                <span class="icon">+</span>
+            </button>
+
+            <div class="answer">
+                Students can apply for admission through the official
+                college admission portal. Fill in the application form,
+                upload the required documents and submit the application
+                before the specified deadline.
+            </div>
+
+        </div>
+
+
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+
+            <button class="question">
+                <span>How can I check my examination timetable?</span>
+                <span class="icon">+</span>
+            </button>
+
+            <div class="answer">
+                The examination timetable is available on the college
+                website and student portal. Students should regularly
+                check the notice section for updates.
+            </div>
+
+        </div>
+
+
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+
+            <button class="question">
+                <span>Where can I pay my college fees?</span>
+                <span class="icon">+</span>
+            </button>
+
+            <div class="answer">
+                College fees can be paid through the online student
+                portal using the available payment options. Students
+                may also contact the accounts department for assistance.
+            </div>
+
+        </div>
+
+
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+
+            <button class="question">
+                <span>How can I get my student ID card?</span>
+                <span class="icon">+</span>
+            </button>
+
+            <div class="answer">
+                Students can collect their ID cards from the college
+                administration office after completing the required
+                registration process.
+            </div>
+
+        </div>
+
+
+        <!-- FAQ 5 -->
+        <div class="faq-item">
+
+            <button class="question">
+                <span>What should I do if I forget my portal password?</span>
+                <span class="icon">+</span>
+            </button>
+
+            <div class="answer">
+                Click the "Forgot Password" option on the student portal
+                login page and follow the instructions to reset your
+                password. You can contact the IT department if you need
+                additional help.
+            </div>
+
+        </div>
+
+
+        <!-- FAQ 6 -->
+        <div class="faq-item">
+
+            <button class="question">
+                <span>How can I contact the college help desk?</span>
+                <span class="icon">+</span>
+            </button>
+
+            <div class="answer">
+                You can contact the college help desk during working
+                hours through the official phone number or email address.
+                You can also visit the help desk in the administration
+                building.
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 College Help Portal | Student Support Services</p>
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        // Select all FAQ questions
+        const questions = document.querySelectorAll(".question");
+
+
+        // Add event listener to every question
+        questions.forEach(function(question) {
+
+            question.addEventListener("click", function() {
+
+                // Find the parent FAQ item
+                const faqItem = question.parentElement;
+
+                // Toggle active class
+                faqItem.classList.toggle("active");
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
